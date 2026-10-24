@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Propuesta A · Urbano</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,500;0,600;0,700;0,800;0,900;1,900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<script src="datos.js"></script>
+<style>
+:root{--negro:#0b0b0b;--fondo:#E7E5E1;--carta:#fff;--talla:#8C6A4A;--suave:rgba(11,11,11,.62)}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--negro);background:radial-gradient(120% 70% at 40% 20%,#F2F1EE 0%,#E4E2DE 60%,#D9D7D2 100%) fixed;min-height:100vh}
+.cab{position:relative;height:232px;overflow:hidden}
+.bloque{position:absolute;left:-40px;top:-70px;width:262px;height:285px;background:var(--negro);transform:rotate(-8deg);box-shadow:0 26px 50px rgba(0,0,0,.25)}
+.marca{position:absolute;left:22px;top:36px;color:#fff}
+.marca b{display:block;font-style:italic;font-weight:900;font-size:44px;letter-spacing:-2.2px;line-height:.95}
+.marca span{display:block;margin-top:12px;font-weight:500;font-size:11px;letter-spacing:4px;opacity:.9}
+.frase{position:absolute;right:16px;top:34px;text-align:right;font-family:'Playfair Display',serif;font-style:italic;font-size:27px;line-height:1.08}
+.frase i{display:block;width:96px;height:3px;background:var(--negro);margin:10px 0 0 auto;border-radius:3px;transform:rotate(-4deg)}
+.orig{position:absolute;right:16px;top:132px;background:var(--negro);color:#fff;border-radius:999px;padding:9px 16px;font-weight:700;font-size:13px}
+.filtros{display:flex;gap:8px;overflow-x:auto;padding:0 16px 14px;scrollbar-width:none}
+.chip{flex:none;border:1.5px solid var(--negro);background:transparent;color:var(--negro);border-radius:999px;padding:8px 14px;font:600 13px Inter}
+.chip.on{background:var(--negro);color:#fff}
+.rej{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:4px 16px 120px}
+.p{background:var(--carta);border-radius:18px;overflow:hidden;box-shadow:0 10px 24px rgba(0,0,0,.10);position:relative}
+.p .img{aspect-ratio:4/5;background:#eee center/cover no-repeat}
+.p .id{position:absolute;top:10px;left:10px;background:var(--negro);color:#fff;border-radius:999px;padding:4px 10px;font:800 11px Inter;letter-spacing:.5px}
+.p .inf{padding:10px 12px 12px;position:relative}
+.p .fila{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.p .m{font-style:italic;font-weight:900;font-size:15px;text-transform:uppercase;letter-spacing:-.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.p .t{color:var(--talla);font-weight:700;font-size:14px}
+.pr{position:relative;display:inline-block;margin-top:8px;height:38px;width:92px}
+.pr svg{position:absolute;inset:0;width:100%;height:100%}
+.pr b{position:relative;display:block;color:#fff;font-style:italic;font-weight:900;font-size:22px;letter-spacing:-1px;padding:4px 0 0 12px}
+.pie{position:fixed;left:0;right:0;bottom:0;padding:14px 16px calc(14px + env(safe-area-inset-bottom));background:linear-gradient(to top,rgba(231,229,225,1) 55%,rgba(231,229,225,0))}
+.wa{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--negro);color:#fff;border-radius:999px;padding:16px;font:700 17px Inter;text-decoration:none}
+.lema{display:flex;justify-content:space-between;padding:0 16px 14px;font:600 11px Inter;letter-spacing:2.5px;color:var(--suave)}
+</style>
+</head>
+<body>
+<header class="cab">
+  <div class="bloque"></div>
+  <div class="marca"><b>ECU<br>MARKET</b><span>ESTILO QUE<br>TE ACOMPAÑA</span></div>
+  <div class="frase">Estilo que<br>se nota<i></i></div>
+  <div class="orig">100% originales</div>
+</header>
+<div class="lema"><span>CALIDAD</span><span>ESTILO</span><span>ORIGINAL</span></div>
+<nav class="filtros"><button class="chip on">Todo</button><button class="chip">Calzado</button><button class="chip">Ropa</button><button class="chip">Talla ▾</button><button class="chip">Para quién ▾</button></nav>
+<main class="rej" id="rej"></main>
+<div class="pie"><a class="wa" href="#">__WA__Pídelo por WhatsApp</a></div>
+<script>
+document.querySelector('.wa').innerHTML = WA + 'Pídelo por WhatsApp';
+document.getElementById('rej').innerHTML = MUESTRA.map(function (p) {
+  return '<article class="p"><div class="img" style="background-image:url(' + fotoUrl(p.foto) + ')"></div><span class="id">' + p.id + '</span>' +
+    '<div class="inf"><div class="fila"><span class="m">' + p.marca + '</span><span class="t">' + p.talla + '</span></div>' +
+    '<div class="pr"><svg viewBox="0 0 600 240" preserveAspectRatio="none" aria-hidden="true"><path d="' + BROCHA + '" fill="#0b0b0b"/></svg><b>$' + p.precio + '</b></div></div></article>';
+}).join('');
+</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Propuesta B · Drop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,500;0,600;0,700;0,800;0,900;1,900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<script src="datos.js"></script>
+<style>
+:root{--negro:#0b0b0b;--fondo:#E9E7E3;--talla:#8C6A4A}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--negro);background:var(--fondo)}
+.hero{position:relative;height:470px;background:#222 center 60%/cover no-repeat;color:#fff}
+.hero:after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,rgba(0,0,0,0) 45%,rgba(0,0,0,0) 65%,rgba(0,0,0,.55) 100%)}
+.hero>*{position:relative;z-index:1}
+.top{display:flex;justify-content:space-between;align-items:center;padding:18px 18px 0}
+.logo{font-style:italic;font-weight:900;font-size:22px;letter-spacing:-1px}
+.orig{background:#fff;color:var(--negro);border-radius:999px;padding:7px 13px;font-weight:700;font-size:12px}
+.neon{position:absolute;left:18px;top:74px;font-family:'Playfair Display',serif;font-style:italic;font-size:38px;line-height:1.05;text-shadow:0 0 18px rgba(255,255,255,.65)}
+.drop{position:absolute;right:18px;bottom:22px;text-align:right;font-weight:900;font-size:64px;line-height:.86;letter-spacing:-3px}
+.franja{display:flex;justify-content:center;margin:-22px 0 10px;position:relative;z-index:2}
+.franja span{background:var(--negro);color:#fff;border-radius:999px;padding:12px 22px;font:700 13px Inter;letter-spacing:3px}
+.filtros{display:flex;gap:8px;overflow-x:auto;padding:8px 16px 14px;scrollbar-width:none}
+.chip{flex:none;border:0;background:#fff;color:var(--negro);border-radius:999px;padding:9px 15px;font:600 13px Inter;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.chip.on{background:var(--negro);color:#fff}
+.rej{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 14px;padding:4px 16px 40px}
+.p{position:relative}
+.p .img{aspect-ratio:3/4;border-radius:18px;background:#ddd center/cover no-repeat;box-shadow:0 14px 30px rgba(0,0,0,.16)}
+.p .t{position:absolute;left:50%;transform:translateX(-50%);top:calc(100% - 92px);background:#fff;border-radius:999px;padding:7px 16px;font:800 14px Inter;box-shadow:0 4px 12px rgba(0,0,0,.15);white-space:nowrap}
+.p .id{position:absolute;top:10px;left:10px;background:rgba(11,11,11,.8);color:#fff;border-radius:8px;padding:3px 8px;font:700 11px Inter}
+.p .inf{display:flex;justify-content:space-between;align-items:baseline;padding:22px 4px 0}
+.p .m{font-weight:600;font-size:14px;color:#333}
+.p .pr{font-weight:900;font-size:19px;letter-spacing:-.5px}
+.banda{margin:0 16px 24px;background:var(--negro);color:#fff;border-radius:24px;display:grid;grid-template-columns:1fr 1fr;padding:18px}
+.banda div{display:flex;gap:10px;align-items:center;font:600 14px Inter;line-height:1.25}
+.banda div+div{border-left:1px solid rgba(255,255,255,.3);padding-left:16px}
+.banda a{color:#fff;text-decoration:none}
+</style>
+</head>
+<body>
+<header class="hero" id="hero">
+  <div class="top"><span class="logo">ECUMARKET</span><span class="orig">100% originales</span></div>
+  <div class="neon">Estilo<br>que se nota</div>
+  <div class="drop">NUEVO<br>DROP</div>
+</header>
+<div class="franja"><span>LO QUE HAY AHORA</span></div>
+<nav class="filtros"><button class="chip on">Todo</button><button class="chip">Calzado</button><button class="chip">Ropa</button><button class="chip">Talla ▾</button><button class="chip">Para quién ▾</button></nav>
+<main class="rej" id="rej"></main>
+<div class="banda"><div><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="#fff" stroke-width="1.6" aria-hidden="true"><path d="M12 3.5a8.5 8.5 0 1 0 0.01 0z M10.5 9.5L12 8v8"/></svg>Piezas únicas<br>por talla</div><div><a href="#" id="wa"></a></div></div>
+<script>
+document.getElementById('hero').style.backgroundImage = 'url(' + fotoUrl(MUESTRA[0].foto, 1000) + ')';
+document.getElementById('wa').innerHTML = '<span style="display:flex;gap:10px;align-items:center">' + WA.replace('width="22" height="22"', 'width="34" height="34"') + 'Reserva por<br>WhatsApp</span>';
+document.getElementById('rej').innerHTML = MUESTRA.map(function (p) {
+  return '<article class="p"><div class="img" style="background-image:url(' + fotoUrl(p.foto) + ')"></div><span class="id">' + p.id + '</span><span class="t">' + p.talla + '</span>' +
+    '<div class="inf"><span class="m">' + p.marca + '</span><span class="pr">$' + p.precio + '</span></div></article>';
+}).join('');
+</script>
+</body>
+</html>
