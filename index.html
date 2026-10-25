@@ -2,11 +2,197 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ECUMarket</title>
-<style>body{margin:0;font-family:system-ui,sans-serif;background:#E9E7E3;color:#0b0b0b;display:grid;place-items:center;min-height:100vh;text-align:center}</style>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#E7E5E1">
+<title>ECUMarket · 100% originales</title>
+<meta name="description" content="Ropa y zapatillas 100% originales. Mira lo que hay ahora y pídelo por WhatsApp.">
+<meta property="og:title" content="ECUMarket · 100% originales">
+<meta property="og:description" content="Mira lo que hay ahora y pídelo por WhatsApp.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0b0b'/%3E%3Ctext x='32' y='44' font-family='Arial' font-weight='900' font-style='italic' font-size='34' fill='white' text-anchor='middle'%3EE%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,500;0,600;0,700;0,800;0,900;1,900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<style>
+:root{--negro:#0b0b0b;--carta:#fff;--talla:#8C6A4A;--suave:rgba(11,11,11,.62);--linea:rgba(11,11,11,.14)}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--negro);background:#E7E5E1 radial-gradient(120% 70% at 40% 20%,#F2F1EE 0%,#E4E2DE 60%,#D9D7D2 100%) fixed;min-height:100vh}
+button,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--talla);outline-offset:2px}
+.envoltura{max-width:760px;margin:0 auto}
+/* cabecera */
+.cab{position:relative;height:232px;overflow:hidden}
+.bloque{position:absolute;left:-40px;top:-70px;width:262px;height:285px;background:var(--negro);transform:rotate(-8deg);box-shadow:0 26px 50px rgba(0,0,0,.25)}
+.marca{position:absolute;left:22px;top:36px;color:#fff;margin:0}
+.marca b{display:block;font-style:italic;font-weight:900;font-size:44px;letter-spacing:-2.2px;line-height:.95}
+.marca span{display:block;margin-top:12px;font-weight:500;font-size:11px;letter-spacing:4px;opacity:.9}
+.frase{position:absolute;right:16px;top:34px;text-align:right;font-family:'Playfair Display',serif;font-style:italic;font-size:27px;line-height:1.08}
+.frase i{display:block;width:96px;height:3px;background:var(--negro);margin:10px 0 0 auto;border-radius:3px;transform:rotate(-4deg)}
+.orig{position:absolute;right:16px;top:132px;background:var(--negro);color:#fff;border-radius:999px;padding:9px 16px;font-weight:700;font-size:13px}
+.lema{display:flex;justify-content:space-between;padding:0 16px 14px;font:600 11px Inter;letter-spacing:2.5px;color:var(--suave)}
+/* filtros */
+.filtros{display:flex;gap:8px;overflow-x:auto;padding:0 16px 14px;scrollbar-width:none}
+.filtros::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1.5px solid var(--negro);background:transparent;color:var(--negro);border-radius:999px;padding:8px 14px;font-weight:600;font-size:13px;cursor:pointer;min-height:38px}
+.chip.on{background:var(--negro);color:#fff}
+select.chip{appearance:none;-webkit-appearance:none;padding-right:28px;background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%230b0b0b'/%3E%3C/svg%3E") no-repeat right 12px center}
+select.chip.on{background-color:var(--negro);color:#fff;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='white'/%3E%3C/svg%3E")}
+.chip.quitar{border-style:dashed}
+.cuenta{padding:0 16px 10px;font-size:13px;color:var(--suave)}
+/* rejilla */
+.rej{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:4px 16px 120px}
+@media (min-width:640px){.rej{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.p{display:block;width:100%;padding:0;border:0;text-align:left;background:var(--carta);border-radius:18px;overflow:hidden;box-shadow:0 10px 24px rgba(0,0,0,.10);position:relative;cursor:pointer}
+.p .img{aspect-ratio:4/5;background:#eee center/cover no-repeat;position:relative}
+.p .img img{width:100%;height:100%;object-fit:cover;display:block}
+.p .id{position:absolute;top:10px;left:10px;background:var(--negro);color:#fff;border-radius:999px;padding:4px 10px;font-weight:800;font-size:11px;letter-spacing:.5px}
+.p .res{position:absolute;top:10px;right:10px;background:#fff;color:var(--negro);border-radius:999px;padding:4px 10px;font-weight:700;font-size:11px}
+.p .inf{padding:10px 12px 13px}
+.fila{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.m{font-style:italic;font-weight:900;font-size:15px;text-transform:uppercase;letter-spacing:-.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.t{flex:none;color:var(--talla);font-weight:700;font-size:14px}
+.pr{display:block;margin-top:6px;font-weight:800;font-size:20px;letter-spacing:-.6px}
+.pr.preg{font-weight:600;font-size:14px;color:var(--suave);letter-spacing:0}
+.vacio,.carga{grid-column:1/-1;text-align:center;padding:50px 20px;color:var(--suave);line-height:1.5}
+.carga i{display:block;width:34px;height:34px;margin:0 auto 14px;border:3px solid var(--linea);border-top-color:var(--negro);border-radius:50%;animation:g 1s linear infinite}
+@keyframes g{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.carga i{animation:none}}
+/* pie */
+.pie{position:fixed;left:0;right:0;bottom:0;padding:14px 16px calc(14px + env(safe-area-inset-bottom));background:linear-gradient(to top,rgba(231,229,225,1) 55%,rgba(231,229,225,0));pointer-events:none}
+.pie a{pointer-events:auto;max-width:728px;margin:0 auto}
+.wa{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--negro);color:#fff;border-radius:999px;padding:16px;font-weight:700;font-size:17px;text-decoration:none}
+/* ficha */
+.velo{position:fixed;inset:0;background:rgba(11,11,11,.55);display:none;align-items:flex-end;justify-content:center;z-index:10}
+.velo.on{display:flex}
+.det{background:#F2F1EE;width:100%;max-width:560px;max-height:94vh;overflow:auto;border-radius:24px 24px 0 0;position:relative}
+.det img{width:100%;display:block;max-height:62vh;object-fit:contain;background:#E4E2DE}
+.det .c{padding:18px 18px calc(22px + env(safe-area-inset-bottom))}
+.det .fila .m{font-size:24px;white-space:normal}
+.det .t{font-size:18px}
+.det .pr{font-size:28px;margin-top:4px}
+.det dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:14px 0 18px;font-size:14px}
+.det dt{color:var(--suave)} .det dd{margin:0;font-weight:600}
+.det .wa{margin-bottom:10px}
+.sec{display:flex;align-items:center;justify-content:center;width:100%;border:1.5px solid var(--negro);background:transparent;border-radius:999px;padding:13px;font-weight:700;font-size:15px;text-decoration:none;color:var(--negro);cursor:pointer;margin-top:8px}
+.cerrar{position:absolute;top:12px;right:12px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.92);font-size:22px;line-height:1;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.15)}
+.firma{text-align:center;padding:10px 16px 130px;font-family:'Playfair Display',serif;font-style:italic;font-size:22px}
+</style>
 </head>
 <body>
-<main><h1>ECUMarket</h1><p>Catálogo en preparación.</p></main>
+<div class="envoltura">
+<header class="cab">
+  <div class="bloque" aria-hidden="true"></div>
+  <h1 class="marca"><b>ECU<br>MARKET</b><span>ESTILO QUE<br>TE ACOMPAÑA</span></h1>
+  <div class="frase" aria-hidden="true">Estilo que<br>se nota<i></i></div>
+  <div class="orig">100% originales</div>
+</header>
+<div class="lema" aria-hidden="true"><span>CALIDAD</span><span>ESTILO</span><span>ORIGINAL</span></div>
+<nav class="filtros" id="filtros" aria-label="Filtros"></nav>
+<div class="cuenta" id="cuenta" aria-live="polite"></div>
+<main class="rej" id="rej"><div class="carga"><i></i>Cargando lo que hay ahora…</div></main>
+<p class="firma" id="firma" hidden>Originales, siempre.</p>
+</div>
+<div class="pie" id="pie" hidden><a class="wa" id="waPie" target="_blank" rel="noopener"></a></div>
+<div class="velo" id="velo"><div class="det" id="det" role="dialog" aria-modal="true" aria-label="Prenda"></div></div>
+<script>
+/* Datos: los lee del catálogo de Google (Apps Script) en formato JSON. Solo datos públicos: nunca costes ni clientes. */
+var FUENTE = 'https://script.google.com/macros/s/AKfycbynX0uyyQP_IRfgeq2PDNimsdVhW-XDuew0iCyHbbAQEdwbvOJdPtTXObQja99QAfIvLw/exec?formato=json';
+var C = null, F = { grupo: '', talla: '', publico: '' };
+var WA = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-1.8-1.8l.8-1-1-2z"/></svg>';
+function $(id) { return document.getElementById(id); }
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+function precio(n) { return n == null ? '' : '$' + (Math.round(n * 100) / 100).toString().replace('.', ','); }
+function nombre(p) { return p.marca || 'Prenda'; }
+function foto(p, w) { return p.foto ? p.foto.replace(/sz=w\d+/, 'sz=w' + w) : ''; }
+function enlace(p) { return location.origin + location.pathname + '?p=' + encodeURIComponent(p.id); }
+function wa(texto) { return 'https://wa.me/' + C.whatsapp + '?text=' + encodeURIComponent(texto); }
+
+/* Cada filtro solo ofrece opciones con prendas, teniendo en cuenta los otros filtros. */
+function cumple(p, salvo) {
+  return (salvo === 'grupo' || !F.grupo || p.grupo === F.grupo) && (salvo === 'talla' || !F.talla || p.talla === F.talla) && (salvo === 'publico' || !F.publico || p.publico === F.publico);
+}
+function cuenta(campo) {
+  var n = {}; C.items.forEach(function (p) { if (p[campo] && cumple(p, campo)) n[p[campo]] = (n[p[campo]] || 0) + 1; });
+  if (F[campo] && !n[F[campo]]) n[F[campo]] = 0; return n;
+}
+function ordenTalla(a, b) {
+  var L = ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL'], ia = L.indexOf(a.toUpperCase()), ib = L.indexOf(b.toUpperCase());
+  if (ia >= 0 || ib >= 0) return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
+  return (parseFloat(a) || 999) - (parseFloat(b) || 999) || (a < b ? -1 : 1);
+}
+function desplegable(campo, rotulo, orden) {
+  var n = cuenta(campo), ks = Object.keys(n).sort(orden);
+  if (ks.length < 2 && !F[campo]) return '';
+  return '<select class="chip' + (F[campo] ? ' on' : '') + '" aria-label="' + rotulo + '" onchange="F.' + campo + '=this.value;pintar()"><option value="">' + rotulo + '</option>' +
+    ks.map(function (t) { return '<option value="' + esc(t) + '"' + (F[campo] === t ? ' selected' : '') + '>' + esc(t) + ' (' + n[t] + ')</option>'; }).join('') + '</select>';
+}
+function hayFiltro() { return !!(F.grupo || F.talla || F.publico); }
+function quitarFiltros() { F = { grupo: '', talla: '', publico: '' }; pintar(); }
+function pintarFiltros() {
+  var g = cuenta('grupo'), total = C.items.filter(function (p) { return cumple(p, 'grupo'); }).length;
+  var h = '<button class="chip' + (!F.grupo ? ' on' : '') + '" onclick="F.grupo=\'\';pintar()">Todo</button>';
+  Object.keys(g).sort().forEach(function (x) { h += '<button class="chip' + (F.grupo === x ? ' on' : '') + '" data-g="' + esc(x) + '" onclick="F.grupo=this.dataset.g;pintar()">' + esc(x) + '</button>'; });
+  h += desplegable('talla', 'Talla', ordenTalla) + desplegable('publico', 'Para quién');
+  if (hayFiltro()) h += '<button class="chip quitar" onclick="quitarFiltros()">Quitar filtros ✕</button>';
+  $('filtros').innerHTML = h;
+}
+function pintar() {
+  pintarFiltros();
+  var l = C.items.filter(function (p) { return cumple(p, ''); });
+  $('cuenta').textContent = l.length + (l.length === 1 ? ' prenda' : ' prendas') + (hayFiltro() ? ' con estos filtros' : ' disponibles');
+  $('rej').innerHTML = l.length ? l.map(function (p) {
+    var i = C.items.indexOf(p);
+    return '<button class="p" onclick="ver(' + i + ')" aria-label="' + esc(nombre(p) + (p.talla ? ', talla ' + p.talla : '') + (p.precio != null ? ', ' + precio(p.precio) : '')) + '">' +
+      '<div class="img">' + (p.foto ? '<img src="' + esc(foto(p, 600)) + '" alt="" loading="lazy">' : '') + '</div>' +
+      '<span class="id">' + esc(p.id) + '</span>' + (p.reservada ? '<span class="res">Reservada</span>' : '') +
+      '<div class="inf"><div class="fila"><span class="m">' + esc(nombre(p)) + '</span>' + (p.talla ? '<span class="t">' + esc(p.talla) + '</span>' : '') + '</div>' +
+      (p.precio != null ? '<span class="pr">' + precio(p.precio) + '</span>' : '<span class="pr preg">Pregunta el precio</span>') + '</div></button>';
+  }).join('') : '<div class="vacio">No hay prendas con estos filtros ahora mismo.<br><br><button class="chip quitar" onclick="quitarFiltros()">Quitar filtros</button></div>';
+}
+function ver(i) {
+  var p = C.items[i];
+  var msg = 'Hola! Me interesa ' + p.id + ' (' + nombre(p) + (p.talla ? ', talla ' + p.talla : '') + ')' + (p.precio == null ? '. ¿Qué precio tiene?' : '.');
+  var h = '<button class="cerrar" onclick="cerrar()" aria-label="Cerrar">×</button>' + (p.foto ? '<img src="' + esc(foto(p, 1400)) + '" alt="' + esc(nombre(p)) + '">' : '') +
+    '<div class="c"><div class="fila"><span class="m">' + esc(nombre(p)) + '</span>' + (p.talla ? '<span class="t">' + esc(p.talla) + '</span>' : '') + '</div>' +
+    (p.precio != null ? '<span class="pr">' + precio(p.precio) + '</span>' : '<span class="pr preg">Pregunta el precio</span>') +
+    '<dl>' + (p.publico ? '<dt>Para</dt><dd>' + esc(p.publico) + '</dd>' : '') + (p.descripcion ? '<dt>Detalle</dt><dd>' + esc(p.descripcion) + '</dd>' : '') +
+    '<dt>Referencia</dt><dd>' + esc(p.id) + '</dd>' + (p.reservada ? '<dt>Estado</dt><dd>Reservada. Pregunta si se libera.</dd>' : '') + '</dl>' +
+    (C.whatsapp ? '<a class="wa" target="_blank" rel="noopener" href="' + esc(wa(msg)) + '">' + WA + (p.precio == null ? 'Preguntar el precio' : 'Me interesa') + '</a>' : '') +
+    '<a class="sec" target="_blank" rel="noopener" href="https://wa.me/?text=' + encodeURIComponent('Mira esto: ' + nombre(p) + (p.talla ? ', talla ' + p.talla : '') + ' ' + enlace(p)) + '">Enviar a alguien</a>' +
+    '<button class="sec" onclick="copiar(this,\'' + esc(enlace(p)) + '\')">Copiar enlace</button></div>';
+  $('det').innerHTML = h; $('velo').classList.add('on'); document.body.style.overflow = 'hidden';
+  try { history.replaceState(null, '', '?p=' + encodeURIComponent(p.id)); } catch (e) { }
+  $('det').querySelector('.cerrar').focus();
+}
+function cerrar() { $('velo').classList.remove('on'); document.body.style.overflow = ''; try { history.replaceState(null, '', location.pathname); } catch (e) { } }
+function copiar(b, t) {
+  var ok = function () { b.textContent = 'Enlace copiado ✓'; };
+  if (navigator.clipboard) navigator.clipboard.writeText(t).then(ok, function () { prompt('Copia el enlace:', t); });
+  else prompt('Copia el enlace:', t);
+}
+$('velo').addEventListener('click', function (e) { if (e.target === this) cerrar(); });
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && $('velo').classList.contains('on')) cerrar(); });
+
+function arrancar(d) {
+  C = d; C.items = C.items || [];
+  if (C.whatsapp) {
+    $('waPie').href = wa('Hola! Vengo del catálogo ECUMarket.'); $('waPie').innerHTML = WA + 'Pídelo por WhatsApp'; $('pie').hidden = false;
+  }
+  $('firma').hidden = false;
+  pintar();
+  var q = new URLSearchParams(location.search).get('p');
+  if (q) { var i = C.items.map(function (p) { return p.id; }).indexOf(q); if (i >= 0) ver(i); }
+}
+function cargar() {
+  // copia de la última carga para que se vea al instante; luego se actualiza
+  try { var g = JSON.parse(localStorage.getItem('ecu_cat') || 'null'); if (g && g.items) arrancar(g); } catch (e) { }
+  fetch(FUENTE, { credentials: 'omit' }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (d) { try { localStorage.setItem('ecu_cat', JSON.stringify(d)); } catch (e) { } arrancar(d); })
+    .catch(function () {
+      if (!C) $('rej').innerHTML = '<div class="vacio">No se ha podido cargar el catálogo. Revisa la conexión.<br><br><button class="chip" onclick="location.reload()">Reintentar</button></div>';
+    });
+}
+cargar();
+</script>
 </body>
 </html>
