@@ -48,7 +48,9 @@ select.chip.on{background-color:var(--negro);color:#fff;background-image:url("da
 .p .inf{padding:10px 12px 13px}
 .fila{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
 .m{font-style:italic;font-weight:900;font-size:15px;text-transform:uppercase;letter-spacing:-.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.t{flex:none;color:var(--talla);font-weight:700;font-size:14px}
+.tl{flex:none;display:inline-block;border:1.5px solid var(--talla);color:var(--talla);border-radius:999px;padding:3px 10px;font-weight:700;font-size:12px;letter-spacing:.2px;white-space:nowrap;line-height:1.3}
+.fila2{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px 8px;margin-top:6px}
+.fila2 .pr{margin-top:0}
 .pr{display:block;margin-top:6px;font-weight:800;font-size:20px;letter-spacing:-.6px}
 .pr.preg{font-weight:600;font-size:14px;color:var(--suave);letter-spacing:0}
 .vacio,.carga{grid-column:1/-1;text-align:center;padding:50px 20px;color:var(--suave);line-height:1.5}
@@ -66,7 +68,7 @@ select.chip.on{background-color:var(--negro);color:#fff;background-image:url("da
 .det img{width:100%;display:block;max-height:62vh;object-fit:contain;background:#E4E2DE}
 .det .c{padding:18px 18px calc(22px + env(safe-area-inset-bottom))}
 .det .fila .m{font-size:24px;white-space:normal}
-.det .t{font-size:18px}
+.det .tl{font-size:14px;padding:4px 12px}
 .det .pr{font-size:28px;margin-top:4px}
 .det dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:14px 0 18px;font-size:14px}
 .det dt{color:var(--suave)} .det dd{margin:0;font-weight:600}
@@ -142,17 +144,18 @@ function pintar() {
     return '<button class="p" onclick="ver(' + i + ')" aria-label="' + esc(nombre(p) + (p.talla ? ', talla ' + p.talla : '') + (p.precio != null ? ', ' + precio(p.precio) : '')) + '">' +
       '<div class="img">' + (p.foto ? '<img src="' + esc(foto(p, 600)) + '" alt="" loading="lazy">' : '') + '</div>' +
       (p.reservada ? '<span class="res">Reservada</span>' : '') +
-      '<div class="inf"><div class="fila"><span class="m">' + esc(nombre(p)) + '</span>' + (p.talla ? '<span class="t">' + esc(p.talla) + '</span>' : '') + '</div>' +
-      (p.precio != null ? '<span class="pr">' + precio(p.precio) + '</span>' : '<span class="pr preg">Pregunta el precio</span>') + '</div></button>';
+      '<div class="inf"><span class="m" style="display:block">' + esc(nombre(p)) + '</span><div class="fila2">' +
+      (p.precio != null ? '<span class="pr">' + precio(p.precio) + '</span>' : '<span class="pr preg">Pregunta el precio</span>') +
+      (p.talla ? '<span class="tl">Talla ' + esc(p.talla) + '</span>' : '') + '</div></div></button>';
   }).join('') : '<div class="vacio">No hay prendas con estos filtros ahora mismo.<br><br><button class="chip quitar" onclick="quitarFiltros()">Quitar filtros</button></div>';
 }
 function ver(i) {
   var p = C.items[i];
   var msg = 'Hola! Me interesa ' + p.id + ' (' + nombre(p) + (p.talla ? ', talla ' + p.talla : '') + ')' + (p.precio == null ? '. ¿Qué precio tiene?' : '.');
   var h = '<button class="cerrar" onclick="cerrar()" aria-label="Cerrar">×</button>' + (p.foto ? '<img src="' + esc(foto(p, 1400)) + '" alt="' + esc(nombre(p)) + '">' : '') +
-    '<div class="c"><div class="fila"><span class="m">' + esc(nombre(p)) + '</span>' + (p.talla ? '<span class="t">' + esc(p.talla) + '</span>' : '') + '</div>' +
+    '<div class="c"><div class="fila"><span class="m">' + esc(nombre(p)) + '</span>' + (p.talla ? '<span class="tl">Talla ' + esc(p.talla) + '</span>' : '') + '</div>' +
     (p.precio != null ? '<span class="pr">' + precio(p.precio) + '</span>' : '<span class="pr preg">Pregunta el precio</span>') +
-    '<dl>' + (p.publico ? '<dt>Para</dt><dd>' + esc(p.publico) + '</dd>' : '') + (p.descripcion ? '<dt>Detalle</dt><dd>' + esc(p.descripcion) + '</dd>' : '') +
+    '<dl>' + (p.talla ? '<dt>Talla</dt><dd>' + esc(p.talla) + '</dd>' : '') + (p.publico ? '<dt>Para</dt><dd>' + esc(p.publico) + '</dd>' : '') + (p.descripcion ? '<dt>Detalle</dt><dd>' + esc(p.descripcion) + '</dd>' : '') +
     '<dt>Código de referencia</dt><dd>' + esc(p.id) + '</dd>' + (p.reservada ? '<dt>Estado</dt><dd>Reservada. Pregunta si se libera.</dd>' : '') + '</dl>' +
     (C.whatsapp ? '<a class="wa" target="_blank" rel="noopener" href="' + esc(wa(msg)) + '">' + WA + (p.precio == null ? 'Preguntar el precio' : 'Me interesa') + '</a>' : '') +
     '<a class="sec" target="_blank" rel="noopener" href="https://wa.me/?text=' + encodeURIComponent('Mira esto: ' + nombre(p) + (p.talla ? ', talla ' + p.talla : '') + ' ' + enlace(p)) + '">Enviar a alguien</a>' +
