@@ -21,7 +21,7 @@ button,select{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--talla);outline-offset:2px}
 .envoltura{max-width:760px;margin:0 auto}
 /* cabecera */
-.cab{position:relative;height:232px;overflow:hidden}
+.cab{position:relative;height:232px;overflow:hidden;margin-bottom:14px}
 .bloque{position:absolute;left:-40px;top:-70px;width:262px;height:285px;background:var(--negro);transform:rotate(-8deg);box-shadow:0 26px 50px rgba(0,0,0,.25)}
 .marca{position:absolute;left:22px;top:36px;color:#fff;margin:0}
 .marca b{display:block;font-style:italic;font-weight:900;font-size:44px;letter-spacing:-2.2px;line-height:.95}
@@ -29,7 +29,6 @@ button,select{font:inherit;color:inherit}
 .frase{position:absolute;right:16px;top:34px;text-align:right;font-family:'Playfair Display',serif;font-style:italic;font-size:27px;line-height:1.08}
 .frase i{display:block;width:96px;height:3px;background:var(--negro);margin:10px 0 0 auto;border-radius:3px;transform:rotate(-4deg)}
 .orig{position:absolute;right:16px;top:132px;background:var(--negro);color:#fff;border-radius:999px;padding:9px 16px;font-weight:700;font-size:13px}
-.lema{display:flex;justify-content:space-between;padding:0 16px 14px;font:600 11px Inter;letter-spacing:2.5px;color:var(--suave)}
 /* filtros */
 .filtros{display:flex;gap:8px;overflow-x:auto;padding:0 16px 14px;scrollbar-width:none}
 .filtros::-webkit-scrollbar{display:none}
@@ -45,7 +44,6 @@ select.chip.on{background-color:var(--negro);color:#fff;background-image:url("da
 .p{display:block;width:100%;padding:0;border:0;text-align:left;background:var(--carta);border-radius:18px;overflow:hidden;box-shadow:0 10px 24px rgba(0,0,0,.10);position:relative;cursor:pointer}
 .p .img{aspect-ratio:4/5;background:#eee center/cover no-repeat;position:relative}
 .p .img img{width:100%;height:100%;object-fit:cover;display:block}
-.p .id{position:absolute;top:10px;left:10px;background:var(--negro);color:#fff;border-radius:999px;padding:4px 10px;font-weight:800;font-size:11px;letter-spacing:.5px}
 .p .res{position:absolute;top:10px;right:10px;background:#fff;color:var(--negro);border-radius:999px;padding:4px 10px;font-weight:700;font-size:11px}
 .p .inf{padding:10px 12px 13px}
 .fila{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
@@ -86,7 +84,6 @@ select.chip.on{background-color:var(--negro);color:#fff;background-image:url("da
   <div class="frase" aria-hidden="true">Estilo que<br>se nota<i></i></div>
   <div class="orig">100% originales</div>
 </header>
-<div class="lema" aria-hidden="true"><span>CALIDAD</span><span>ESTILO</span><span>ORIGINAL</span></div>
 <nav class="filtros" id="filtros" aria-label="Filtros"></nav>
 <div class="cuenta" id="cuenta" aria-live="polite"></div>
 <main class="rej" id="rej"><div class="carga"><i></i>Cargando lo que hay ahora…</div></main>
@@ -144,7 +141,7 @@ function pintar() {
     var i = C.items.indexOf(p);
     return '<button class="p" onclick="ver(' + i + ')" aria-label="' + esc(nombre(p) + (p.talla ? ', talla ' + p.talla : '') + (p.precio != null ? ', ' + precio(p.precio) : '')) + '">' +
       '<div class="img">' + (p.foto ? '<img src="' + esc(foto(p, 600)) + '" alt="" loading="lazy">' : '') + '</div>' +
-      '<span class="id">' + esc(p.id) + '</span>' + (p.reservada ? '<span class="res">Reservada</span>' : '') +
+      (p.reservada ? '<span class="res">Reservada</span>' : '') +
       '<div class="inf"><div class="fila"><span class="m">' + esc(nombre(p)) + '</span>' + (p.talla ? '<span class="t">' + esc(p.talla) + '</span>' : '') + '</div>' +
       (p.precio != null ? '<span class="pr">' + precio(p.precio) + '</span>' : '<span class="pr preg">Pregunta el precio</span>') + '</div></button>';
   }).join('') : '<div class="vacio">No hay prendas con estos filtros ahora mismo.<br><br><button class="chip quitar" onclick="quitarFiltros()">Quitar filtros</button></div>';
@@ -156,7 +153,7 @@ function ver(i) {
     '<div class="c"><div class="fila"><span class="m">' + esc(nombre(p)) + '</span>' + (p.talla ? '<span class="t">' + esc(p.talla) + '</span>' : '') + '</div>' +
     (p.precio != null ? '<span class="pr">' + precio(p.precio) + '</span>' : '<span class="pr preg">Pregunta el precio</span>') +
     '<dl>' + (p.publico ? '<dt>Para</dt><dd>' + esc(p.publico) + '</dd>' : '') + (p.descripcion ? '<dt>Detalle</dt><dd>' + esc(p.descripcion) + '</dd>' : '') +
-    '<dt>Referencia</dt><dd>' + esc(p.id) + '</dd>' + (p.reservada ? '<dt>Estado</dt><dd>Reservada. Pregunta si se libera.</dd>' : '') + '</dl>' +
+    '<dt>Código de referencia</dt><dd>' + esc(p.id) + '</dd>' + (p.reservada ? '<dt>Estado</dt><dd>Reservada. Pregunta si se libera.</dd>' : '') + '</dl>' +
     (C.whatsapp ? '<a class="wa" target="_blank" rel="noopener" href="' + esc(wa(msg)) + '">' + WA + (p.precio == null ? 'Preguntar el precio' : 'Me interesa') + '</a>' : '') +
     '<a class="sec" target="_blank" rel="noopener" href="https://wa.me/?text=' + encodeURIComponent('Mira esto: ' + nombre(p) + (p.talla ? ', talla ' + p.talla : '') + ' ' + enlace(p)) + '">Enviar a alguien</a>' +
     '<button class="sec" onclick="copiar(this,\'' + esc(enlace(p)) + '\')">Copiar enlace</button></div>';
